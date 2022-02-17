@@ -1,0 +1,60 @@
+name: qt5-core20
+base: core20 
+version: '20.04'
+summary: Qt5 runtime for core20
+description: |
+  This snap is to be consumed by various Qt apps which uses Qt 5 packages provided from 
+  Ubuntu official repository.
+  Qt provides C++ classes and QML types for rendering GUI.
+
+grade: stable 
+confinement: strict
+compression: lzo
+
+architectures:
+  - build-on: amd64
+    run-on: amd64
+    
+slots: 
+  qt5-core20:
+    interface: content
+    read: 
+      - /
+
+parts:
+  qt5:
+    plugin: nil
+    stage-packages:
+      - libxkbcommon0
+      - ttf-ubuntu-font-family
+#      - dmz-cursor-theme
+#      - light-themes
+#      - adwaita-icon-theme
+#      - gnome-themes-standard
+#      - shared-mime-info
+      - libqt5gui5
+      - libqt5sql5-sqlite
+      - libqt5webkit5
+      - libqt5x11extras5
+      - libqt5waylandclient5
+      - libqt5xml5
+#      - libdb5.3
+#      - libgdk-pixbuf2.0-0
+      - libqt5svg5 
+      - try: [appmenu-qt5]
+      - locales-all
+      - xdg-user-dirs
+      - fcitx-frontend-qt5
+      - libglu1-mesa
+
+  cleanup:
+    after:
+      - qt5
+    plugin: nil
+    override-prime: |
+      set -eux
+      for CRUFT in bug lintian man; do
+        rm -rf $SNAPCRAFT_PRIME/usr/share/$CRUFT
+      done
+      find $SNAPCRAFT_PRIME/usr/share/doc/ -type f -not -name 'copyright' -delete
+      find $SNAPCRAFT_PRIME/usr/share -type d -empty -delete
