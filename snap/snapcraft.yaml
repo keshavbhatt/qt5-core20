@@ -26,6 +26,11 @@ parts:
     plugin: nil
     stage-packages:
       - libxkbcommon0
+      - fontconfig
+      - libice6
+      - qt5-xdgdesktopportal-platformtheme
+      - qt5-gtk2-platformtheme
+      - qt5-gtk-platformtheme
       - ttf-ubuntu-font-family
       - dmz-cursor-theme
       - light-themes
