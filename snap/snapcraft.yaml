@@ -27,25 +27,26 @@ parts:
     stage-packages:
       - libxkbcommon0
       - ttf-ubuntu-font-family
-#      - dmz-cursor-theme
-#      - light-themes
-#      - adwaita-icon-theme
-#      - gnome-themes-standard
-#      - shared-mime-info
+      - dmz-cursor-theme
+      - light-themes
+      - adwaita-icon-theme
+      - gnome-themes-standard
+      - shared-mime-info
       - libqt5gui5
       - libqt5sql5-sqlite
       - libqt5webkit5
       - libqt5x11extras5
       - libqt5waylandclient5
       - libqt5xml5
-#      - libdb5.3
-#      - libgdk-pixbuf2.0-0
+      - libgdk-pixbuf2.0-0
       - libqt5svg5 
       - try: [appmenu-qt5]
       - locales-all
-      - xdg-user-dirs
       - fcitx-frontend-qt5
       - libglu1-mesa
+      - xdg-user-dirs
+      - ibus-gtk3
+      - libibus-1.0-5
 
   cleanup:
     after:
