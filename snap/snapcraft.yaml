@@ -50,7 +50,7 @@ parts:
       - ibus-gtk3
       - libibus-1.0-5
       - libcanberra-gtk3-module
-      - qt5-gtk-platformtheme.
+      - qt5-gtk-platformtheme
       - qt5-gtk2-platformtheme
       - qt5-xdgdesktopportal-platformtheme
 
