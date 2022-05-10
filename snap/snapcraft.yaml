@@ -29,6 +29,7 @@ parts:
       - adwaita-icon-theme
       - dmz-cursor-theme
       - fontconfig
+      - freeglut3
       - gnome-themes-standard
       - libgdk-pixbuf2.0-0
       - libglib2.0-0
