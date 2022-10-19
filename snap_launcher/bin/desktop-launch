@@ -225,6 +225,9 @@ export GST_PLUGIN_SCANNER="$SNAP_DESKTOP_RUNTIME/usr/lib/$ARCH/gstreamer1.0/gstr
 prepend_dir XDG_CONFIG_DIRS "$SNAP_DESKTOP_RUNTIME/etc/xdg"
 prepend_dir XDG_CONFIG_DIRS "$SNAP/etc/xdg"
 
+# fix for wget cannot read wgetrc in /etc/wgetrc cause we using runtime
+export SYSTEM_WGETRC=$RUNTIME_NAME/etc/wgetrc
+
 # Define snaps' own data dir
 prepend_dir XDG_DATA_DIRS "$SNAP_DESKTOP_RUNTIME/usr/share"
 prepend_dir XDG_DATA_DIRS "$SNAP/usr/share"
