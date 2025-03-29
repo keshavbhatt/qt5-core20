@@ -101,10 +101,10 @@ parts:
       chmod +x ${SNAPCRAFT_PRIME}/usr/bin/python
       chmod +x ${SNAPCRAFT_PRIME}/usr/bin/python3
 
+      snapcraftctl prime
+
       # Phantomjs path fix
       mv ${SNAPCRAFT_PRIME}/usr/lib/phantomjs/phantomjs ${SNAPCRAFT_PRIME}/usr/bin/phantomjs
-
-      snapcraftctl prime
             
   cleanup:
     after:
