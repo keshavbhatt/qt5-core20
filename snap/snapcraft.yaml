@@ -65,6 +65,12 @@ parts:
       - libqt5x11extras5
       - libqt5xml5
       
+      # WARNING: optional dependency of ytdlp 
+      # do not add it if we are using
+      # qt from third party repositories
+      # this depends in Qt and QWebkit
+      - phantomjs
+      
       # Other deps
       - mpv
       - ffmpeg
