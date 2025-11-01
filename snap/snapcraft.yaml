@@ -80,7 +80,6 @@ parts:
       - pv
       - tar
       - libtag1v5
-      - python3.9
 
     override-prime: |
 
@@ -105,6 +104,58 @@ parts:
 
       # Phantomjs path fix
       mv ${SNAPCRAFT_PRIME}/usr/lib/phantomjs/phantomjs ${SNAPCRAFT_PRIME}/usr/bin/phantomjs
+
+# Python 3.12 build for core20
+  python312:
+    after:
+      - qt5
+    plugin: nil
+    source: https://www.python.org/ftp/python/3.12.0/Python-3.12.0.tgz
+    source-type: tar
+    build-packages:
+      - build-essential
+      - libssl-dev
+      - zlib1g-dev
+      - libbz2-dev
+      - libreadline-dev
+      - libsqlite3-dev
+      - libffi-dev
+      - liblzma-dev
+      - libncurses5-dev
+      - libgdbm-dev
+      - libdb-dev
+      - uuid-dev
+      - tk-dev
+      - libuuid1
+    override-build: |
+      set -eux
+      ./configure --prefix=/usr --enable-optimizations --disable-test-modules
+      JOBS=$(nproc)
+      if [ "$JOBS" -gt 2 ]; then JOBS=2; fi
+      make -j$JOBS
+      make altinstall DESTDIR=$SNAPCRAFT_PART_INSTALL
+    stage:
+      - usr
+    prime:
+      - usr
+    override-prime: |
+      set -eux
+      mkdir -p "${SNAPCRAFT_PRIME}/usr/bin/"
+
+      cat <<'EOF' > ${SNAPCRAFT_PRIME}/usr/bin/python
+      #!/bin/sh
+      exec "$SNAP_DESKTOP_RUNTIME/usr/bin/python3.12" "$@"
+      EOF
+
+      cat <<'EOF' > ${SNAPCRAFT_PRIME}/usr/bin/python3
+      #!/bin/sh
+      exec "$SNAP_DESKTOP_RUNTIME/usr/bin/python3.12" "$@"
+      EOF
+
+      chmod +x ${SNAPCRAFT_PRIME}/usr/bin/python
+      chmod +x ${SNAPCRAFT_PRIME}/usr/bin/python3
+
+      snapcraftctl prime
             
   cleanup:
     after:
